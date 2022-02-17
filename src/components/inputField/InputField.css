@@ -1,0 +1,89 @@
+.container__inputfield {
+  background: #e5e5ef;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-bottom: 0.25rem solid #f5f5ff;
+}
+
+.inputfield__form {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.inputfield__form__input {
+  position: relative;
+  background: transparent;
+  width: calc(100% - 1rem);
+  height: 2.55rem;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  outline: 0;
+  color: #333;
+  text-indent: 1.75rem;
+  font-size: 1rem;
+  border: 1px solid #00000035;
+  transition: all 300ms ease;
+}
+
+.form__icon {
+  position: absolute;
+  top: 0.5rem;
+  left: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: #f5f5ff;
+  border-radius: 100%;
+  transition: all 300ms ease;
+}
+
+.inputfield__form__input:focus,
+.inputfield__form__input:active {
+  text-indent: 0.5rem;
+  font-size: 1.25rem;
+  box-shadow: 0 0.15rem 0.5rem #777;
+  border: 0;
+  background: #f5f5ff;
+  animation: switch ease 500ms;
+}
+
+.inputfield__form__input::placeholder,
+.inputfield__form__input::placeholder {
+  color: #00000035;
+}
+
+.inputfield__form__input:focus::placeholder,
+.inputfield__form__input:active::placeholder {
+  opacity: 0;
+  transition: all 500ms ease;
+}
+
+@keyframes switch {
+  0% {
+    background: transparent;
+  }
+  15% {
+    background: linear-gradient(to right, #f5f5ff20, transparent 15%);
+  }
+  25% {
+    background: linear-gradient(to right, #f5f5ff50, transparent 35%);
+  }
+  50% {
+    background: linear-gradient(to right, #f5f5ff90, transparent 50%);
+  }
+  50% {
+    background: linear-gradient(to right, #f5f5ffc0, transparent 75%);
+  }
+  100% {
+    background: #f5f5ff;
+  }
+}
+
+.inputfield__form__input:focus + .form__icon,
+.inputfield__form__input:active + .form__icon {
+  transform: translate(-0.95rem, -1rem);
+  width: 1.15rem;
+  height: 1.15rem;
+  background: transparent;
+}
