@@ -1,3 +1,3 @@
 # Simple TODO
 
-This app helps you understand how **redux-toolkit** helps you get things done and makes it easier to work with **redux** in general.
+Just simple TODO-app that helps you to understand how **redux-toolkit** exactly helps you and makes it easier to work with **redux** in general.
