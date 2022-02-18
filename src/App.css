@@ -8,9 +8,9 @@
 
 .container {
   overflow: hidden;
-  height: 80%;
-  width: 20%;
-  min-width: 330px;
+  height: 34rem;
+  width: 24rem;
+  min-width: 20rem;
   border-radius: 0.5rem;
   box-shadow: 0 0.25rem 0.5rem #1c1c1c;
 }
