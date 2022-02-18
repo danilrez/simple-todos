@@ -20,7 +20,7 @@ export default function InputField() {
         <input
           className="inputfield__form__input"
           type="text"
-          autocomplete="off"
+          autoComplete="off"
           placeholder="add your todo"
           value={text}
           onChange={(e) => setText(e.target.value)}
