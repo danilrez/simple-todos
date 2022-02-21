@@ -1,6 +1,5 @@
 .container__itemslist {
   overflow-y: auto;
-  padding: 0.5rem 1rem;
   background: #f5f5ff;
   width: 100%;
   height: 27rem;
@@ -19,11 +18,11 @@ ul {
   width: 7px;
 }
 .container__itemslist::-webkit-scrollbar-thumb {
-  background: #00000035;
+  background: #d5d5df;
   border-radius: 0.25rem;
   height: 7px;
 }
 .container__itemslist::-webkit-scrollbar-thumb:hover {
-  background: #999;
+  background: #c5c5cf;
   height: 7px;
 }

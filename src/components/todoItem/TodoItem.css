@@ -1,14 +1,11 @@
 li {
   padding: 0.5rem;
   padding-left: 1rem;
-  margin: 0.25rem 0;
   display: flex;
   justify-content: space-between;
   width: 100%;
   color: #333;
-  background: #00000005;
-  border: 0.1rem solid #d5d5df;
-  border-radius: 0.25rem;
+  border-bottom: 0.1rem solid #d5d5df;
   cursor: default;
   transition: all 500ms ease;
 }
