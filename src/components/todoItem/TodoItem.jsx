@@ -12,12 +12,11 @@ export default function TodoItem({ id, text, completed }) {
   const [editing, setEditing] = React.useState(false);
   const checkboxAnimationRef = useSpringRef();
   const [checkmarkLength, setCheckmarkLength] = React.useState();
-
   const checkmarkAnimationRef = useSpringRef();
 
   const checkboxAnimationStyle = useSpring({
-    background: completed ? '#09f' : '#f5f5ff',
-    border: completed ? '0.15rem solid #08f' : ' 0.15rem solid #00000025',
+    background: completed ? '#09f' : 'var(--checkbox)',
+    border: completed ? '0.12rem solid #08f' : ' 0.12rem solid var(--checkbox-border)',
     config: config.gentle,
     ref: checkboxAnimationRef,
   });
@@ -46,7 +45,7 @@ export default function TodoItem({ id, text, completed }) {
 
   return (
     <li>
-      <label className={`todo__items ${completed ? 'todo__items__done' : null}`}>
+      <label className="todo__items">
         <input type="checkbox" onChange={() => dispatch(toggleTodoCompleted({ id }))} />
         <animated.svg
           style={checkboxAnimationStyle}
@@ -57,14 +56,16 @@ export default function TodoItem({ id, text, completed }) {
           <animated.path
             d="M1 4.5L5 9L14 1"
             strokeWidth="2"
-            stroke="#f5f5ff"
+            stroke="var(--stroke)"
             ref={(ref) => (ref ? setCheckmarkLength(ref.getTotalLength()) : null)}
             strokeDasharray={checkmarkLength}
             strokeDashoffset={checkmarkAnimationStyle.x}
           />
         </animated.svg>
         {!editing ? (
-          <span className="items__input" onDoubleClick={() => setEditing(!editing)}>
+          <span
+            className={`items__input ${completed ? 'items__input__done' : null}`}
+            onDoubleClick={() => setEditing(!editing)}>
             {editText}
           </span>
         ) : (
