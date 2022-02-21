@@ -1,15 +1,19 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { removeTodo, toggleTodoCompleted } from '../../store/todoSlice';
-import { FcFullTrash } from 'react-icons/fc';
+import { editTodo, removeTodo, toggleTodoCompleted } from '../../store/todoSlice';
+import { FcFullTrash, FcEditImage } from 'react-icons/fc';
 import './TodoItem.css';
 
 import { animated, useSpring, config, useSpringRef, useChain } from 'react-spring';
 
 export default function TodoItem({ id, text, completed }) {
   const dispatch = useDispatch();
+  const [editText, setEditText] = React.useState(text);
+  const [editing, setEditing] = React.useState(false);
   const checkboxAnimationRef = useSpringRef();
   const [checkmarkLength, setCheckmarkLength] = React.useState();
+
+  const checkmarkAnimationRef = useSpringRef();
 
   const checkboxAnimationStyle = useSpring({
     background: completed ? '#09f' : '#f5f5ff',
@@ -17,8 +21,6 @@ export default function TodoItem({ id, text, completed }) {
     config: config.gentle,
     ref: checkboxAnimationRef,
   });
-
-  const checkmarkAnimationRef = useSpringRef();
   const checkmarkAnimationStyle = useSpring({
     x: completed ? 0 : checkmarkLength,
     config: config.gentle,
@@ -32,14 +34,20 @@ export default function TodoItem({ id, text, completed }) {
     [0, 0.1]
   );
 
+  const handleEdit = (e) => {
+    e.preventDefault();
+    setEditText(e.target.value);
+    dispatch(editTodo({ id, editText }));
+  };
+
+  const handleEditDone = (e) => {
+    if (e.code === 'Enter') setEditing(!editing);
+  };
+
   return (
     <li>
-      <label className={`todo__items ${completed ? 'todo__items__active' : null}`}>
-        <input
-          type="checkbox"
-          defaultChecked={completed}
-          onChange={() => dispatch(toggleTodoCompleted({ id }))}
-        />
+      <label className={`todo__items ${completed ? 'todo__items__done' : null}`}>
+        <input type="checkbox" onChange={() => dispatch(toggleTodoCompleted({ id }))} />
         <animated.svg
           style={checkboxAnimationStyle}
           className="checkbox"
@@ -55,10 +63,24 @@ export default function TodoItem({ id, text, completed }) {
             strokeDashoffset={checkmarkAnimationStyle.x}
           />
         </animated.svg>
-        {text}
+        {!editing ? (
+          <span className="items__input" onDoubleClick={() => setEditing(!editing)}>
+            {editText}
+          </span>
+        ) : (
+          <input
+            className="items__input__editing"
+            type="text"
+            autoComplete="off"
+            value={editText}
+            onChange={handleEdit}
+            onKeyDown={handleEditDone}
+          />
+        )}
       </label>
+      <FcEditImage className="todo__items__edit" onClick={() => setEditing(!editing)} />
       <FcFullTrash
-        className="content__items__delete"
+        className="todo__items__delete"
         onClick={() => dispatch(removeTodo({ id }))}
       />
     </li>
