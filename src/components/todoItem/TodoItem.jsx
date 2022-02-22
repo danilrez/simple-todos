@@ -14,9 +14,15 @@ export default function TodoItem({ id, text, completed }) {
   const [checkmarkLength, setCheckmarkLength] = React.useState();
   const checkmarkAnimationRef = useSpringRef();
 
+  // TODO: think about how to fix this bug with colors after switched themes
+  const localTheme = window.localStorage.getItem('theme');
+  const bgDefault = localTheme === 'light' ? '#f5f5f5' : '#2d333b';
+  const borderDefault = localTheme === 'light' ? '#c5c5cf' : '#444c57';
+  //
+
   const checkboxAnimationStyle = useSpring({
-    background: completed ? '#09f' : 'var(--checkbox)',
-    border: completed ? '0.12rem solid #08f' : ' 0.12rem solid var(--checkbox-border)',
+    background: completed ? '#09f' : bgDefault,
+    border: completed ? '0.12rem solid #08f' : `0.12rem solid ${borderDefault}`,
     config: config.gentle,
     ref: checkboxAnimationRef,
   });
@@ -49,7 +55,7 @@ export default function TodoItem({ id, text, completed }) {
         <input type="checkbox" onChange={() => dispatch(toggleTodoCompleted({ id }))} />
         <animated.svg
           style={checkboxAnimationStyle}
-          className="checkbox"
+          className={`checkbox ${completed ? 'checkbox_done' : null}`}
           aria-hidden="true"
           viewBox="0 0 15 11"
           fill="none">
