@@ -1,6 +1,6 @@
 import React from 'react';
 import { FcViewDetails } from 'react-icons/fc';
-import { BsFillBrightnessHighFill, BsGearFill, BsMoonStarsFill } from 'react-icons/bs';
+import { BsBrightnessHigh, BsGear, BsMoonStars } from 'react-icons/bs';
 import './Header.css';
 
 import { ThemeContext } from '../../globalStyle/GlobalStyle';
@@ -21,12 +21,12 @@ export default function Header() {
           style={{ display: 'flex', transition: 'all 500ms ease' }}
           onClick={toggleTheme}>
           {theme === 'light' ? (
-            <BsMoonStarsFill className="header__menu__icon" />
+            <BsMoonStars className="header__menu__icon" />
           ) : (
-            <BsFillBrightnessHighFill className="header__menu__icon" />
+            <BsBrightnessHigh className="header__menu__icon" />
           )}
         </div>
-        <BsGearFill className="header__menu__icon" />
+        <BsGear className="header__menu__icon" />
       </div>
     </div>
   );

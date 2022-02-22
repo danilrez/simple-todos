@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { editTodo, removeTodo, toggleTodoCompleted } from '../../store/todoSlice';
-import { FcFullTrash, FcEditImage } from 'react-icons/fc';
+import { BsTrash, BsPen } from 'react-icons/bs';
+
 import './TodoItem.css';
 
 import { animated, useSpring, config, useSpringRef, useChain } from 'react-spring';
@@ -55,7 +56,7 @@ export default function TodoItem({ id, text, completed }) {
         <input type="checkbox" onChange={() => dispatch(toggleTodoCompleted({ id }))} />
         <animated.svg
           style={checkboxAnimationStyle}
-          className={`checkbox ${completed ? 'checkbox_done' : null}`}
+          className={`checkbox ${completed ? 'checkbox_done' : ''}`}
           aria-hidden="true"
           viewBox="0 0 15 11"
           fill="none">
@@ -63,14 +64,14 @@ export default function TodoItem({ id, text, completed }) {
             d="M1 4.5L5 9L14 1"
             strokeWidth="2"
             stroke="var(--stroke)"
-            ref={(ref) => (ref ? setCheckmarkLength(ref.getTotalLength()) : null)}
+            ref={(ref) => (ref ? setCheckmarkLength(ref.getTotalLength()) : '')}
             strokeDasharray={checkmarkLength}
             strokeDashoffset={checkmarkAnimationStyle.x}
           />
         </animated.svg>
         {!editing ? (
           <span
-            className={`items__input ${completed ? 'items__input__done' : null}`}
+            className={`items__input ${completed ? 'items__input__done' : ''}`}
             onDoubleClick={() => setEditing(!editing)}>
             {editText}
           </span>
@@ -85,8 +86,8 @@ export default function TodoItem({ id, text, completed }) {
           />
         )}
       </label>
-      <FcEditImage className="todo__items__edit" onClick={() => setEditing(!editing)} />
-      <FcFullTrash
+      <BsPen className="todo__items__edit" onClick={() => setEditing(!editing)} />
+      <BsTrash
         className="todo__items__delete"
         onClick={() => dispatch(removeTodo({ id }))}
       />
